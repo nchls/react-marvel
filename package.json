@@ -1,0 +1,31 @@
+{
+  "name": "react-marvel",
+  "version": "0.1.0",
+  "description": "A React-powered single-page application using the Marvel API",
+  "author": "Ian Nicholas",
+  "homepage": "https://github.com/nchls/react-marvel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nchls/react-marvel.git"
+  },
+  "main": "server.js",
+  "scripts": {
+    "build": "gulp",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-router": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.3.13",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.1",
+    "gulp-uglify": "^1.5.1"
+  }
+}
