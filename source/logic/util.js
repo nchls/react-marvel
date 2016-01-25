@@ -33,6 +33,6 @@
 				return document.addEventListener('DOMContentLoaded', resolve);
 			}
 		});
-	}
+	};
 
 }(window));
