@@ -35,4 +35,27 @@
 		});
 	};
 
+	module.debounce = function(fn, delay) {
+		var self, args, ts, timeout;
+
+		var delayed = function() {
+			var since = new Date().getTime() - ts;
+			if (since < delay) {
+				timeout = setTimeout(delayed, delay - since);
+			} else {
+				timeout = undefined;
+				fn.apply(self, args);
+			}
+		};
+
+		return function wrap() {
+			self = this;
+			args = arguments;
+			ts = new Date().getTime();
+			if (timeout === undefined) {
+				timeout = setTimeout(delayed, delay);
+			}
+		}
+	};
+
 }(window));

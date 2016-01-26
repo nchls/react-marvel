@@ -1,5 +1,7 @@
 (function(global) {
 
+	global.Link = global.ReactRouter.Link;
+
 	global.util.onDomReady().then(function() {
 		var Router = global.ReactRouter.Router;
 		var Route = global.ReactRouter.Route;
@@ -23,6 +25,28 @@
 				</header>
 				{this.props.children}
 			</div>;
+		}
+	});
+
+	global.Breadcrumbs = React.createClass({
+		getInitialState: function() {
+			return {
+				thisPage: ''
+			};
+		},
+
+		render: function() {
+			var self = this;
+			return <nav className="breadcrumbs">
+				<ol>
+					<li>
+						<Link to="/">Characters</Link>
+					</li>
+					<li>
+						{self.props.thisPage}
+					</li>
+				</ol>
+			</nav>;
 		}
 	});
 

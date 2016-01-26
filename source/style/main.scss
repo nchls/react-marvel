@@ -1,3 +1,5 @@
+$color-link: rgb(255, 180, 0);
+
 *,
 *:before,
 *:after {
@@ -10,7 +12,12 @@ body {
 	font-family: sans-serif;
 	font-size: 20px;
 }
-ul {
+h2,
+h3 {
+	margin: 1.5em 0 0.5em;
+}
+ul,
+ol {
 	padding: 0;
 }
 li {
@@ -18,12 +25,44 @@ li {
 }
 a {
 	text-decoration: none;
-}
-.index {
-	ul {
-		display: flex;
-		flex-wrap: wrap;
+	&:link,
+	&:visited {
+		color: $color-link;
 	}
+	&:hover {
+		color: lighten($color-link, 20%);
+		text-decoration: underline;
+	}
+}
+
+header {
+	padding: 0 1em;
+}
+
+.breadcrumbs {
+	li {
+		display: inline-block;
+		&:not(:last-child):after {
+			content: "\203A";
+			display: inline-block;
+			padding: 0 0.7em;
+			opacity: 0.5;
+		}
+	}
+}
+
+.search-bar {
+	display: block;
+	width: 50%;
+	min-width: 400px;
+	font-size: 24px;
+	margin: 0 auto;
+}
+
+.characters-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
 	li {
 		width: percentage(1 / 2);
 		@media (min-width: 600px) {
@@ -32,14 +71,8 @@ a {
 		@media (min-width: 800px) {
 			width: percentage(1 / 4);
 		}
-		@media (min-width: 1000px) {
-			width: percentage(1 / 5);
-		}
 		@media (min-width: 1200px) {
 			width: percentage(1 / 6);
-		}
-		@media (min-width: 1400px) {
-			width: percentage(1 / 7);
 		}
 	}
 	a {
@@ -48,10 +81,20 @@ a {
 		height: 0;
 		padding-bottom: 100%;
 		background-size: cover;
+		transition: 0.15s all;
+		&:hover {
+			z-index: 1;
+			box-shadow: 0 0 2em rgba(0,0,0,0.5);
+			.caption {
+				background-color: rgba(0,0,0,0.7);
+				padding-right: 0.8em;
+			}
+		}
 	}
 	.caption {
 		width: 100%;
 		padding: 0.5em;
+		transition: 0.15s all;
 		background-color: rgba(0,0,0,0.5);
 		position: absolute;
 		bottom: 0;
@@ -64,9 +107,29 @@ a {
 			font-size: 1.3em;
 		}
 	}
+	&.isLoading {
+		opacity: 0.6;
+	}
 }
 
-.characterDetail {
-	padding-bottom: 100%;
-	background-size: cover;
+.network-warning {
+	padding: 1em;
 }
+
+.character-detail {
+	padding: 0 1em 1em;
+}
+.char-image {
+	background: #444;
+	padding: 0.5em;
+	margin: 0 0.5em 1em;
+	img {
+		width: 100%;
+		height: auto;
+	}
+	@media (min-width: 600px) {
+		float: right;
+		width: 35%;
+	}
+}
+

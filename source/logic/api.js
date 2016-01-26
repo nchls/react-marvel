@@ -11,6 +11,9 @@
 	var resources = {
 		characters: {
 			endpoint: 'characters',
+			queryPairs: [
+				'limit=24'
+			],
 			transformer: function(response) {
 				var output = [];
 				var character;
@@ -28,24 +31,35 @@
 		character: {
 			endpoint: 'characters/:id',
 			transformer: function(response) {
-				window.charResponse = response.data.results[0];
 				return response.data.results[0];
 			}
 		}
 	};
 
-	module.get = function(resource, query) {
+	module.get = function(resource, params, query) {
 		return new Promise(function(resolve, reject) {
 			var resourceConfig = resources[resource];
+			var key;
 			var url = apiBase + resourceConfig.endpoint;
-			for (var key in query) {
-				url = url.replace(':' + key, query[key]);
+			var queryPairs = (resourceConfig.queryPairs || []).slice(0);
+
+			// Replace path parameters, e.g. characters/:id
+			for (key in params) {
+				url = url.replace(':' + key, params[key]);
 			}
 
+			// Add query-string parameters
+			for (key in query) {
+				queryPairs.push(key + '=' + encodeURIComponent(query[key]));
+			}
+			url += '?' + queryPairs.join('&');
+
 			if (url in memCache) {
+				// Use cached data from previous call
 				resolve(memCache[url]);
 			} else {
-				var dataPromise = util.xhrReq(url + '?apikey=' + publicKey);
+				// Request data from Marvel API
+				var dataPromise = util.xhrReq(url + '&apikey=' + publicKey);
 				dataPromise.then(function(response) {
 					response = JSON.parse(response);
 					var data = resourceConfig.transformer(response);

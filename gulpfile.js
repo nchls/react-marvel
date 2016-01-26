@@ -26,19 +26,15 @@ gulp.task('jsx', function() {
 
 gulp.task('bundle', ['jsx'], function() {
 	gulp.src([
-//			'./node_modules/react/dist/react.min.js',
-//			'./node_modules/react-dom/dist/react-dom.min.js',
-//			'./node_modules/history/umd/History.min.js',
-//			'./node_modules/react-router/umd/ReactRouter.min.js',
-			'./node_modules/react/dist/react.js',
-			'./node_modules/react-dom/dist/react-dom.js',
-			'./node_modules/history/umd/History.js',
-			'./node_modules/react-router/umd/ReactRouter.js',
+			'./node_modules/react/dist/react.min.js',
+			'./node_modules/react-dom/dist/react-dom.min.js',
+			'./node_modules/history/umd/History.min.js',
+			'./node_modules/react-router/umd/ReactRouter.min.js',
 			'./source/logic/util.js',
 			'./source/logic/api.js',
 			'./.compiled-components/*.js'
 		])
-//		.pipe(uglify())
+		.pipe(uglify())
 		.pipe(concat('bundle.js'))
 		.pipe(gulp.dest('./dist/'))
 });
