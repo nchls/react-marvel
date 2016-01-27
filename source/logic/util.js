@@ -4,7 +4,12 @@
 	var module = {};
 	global.util = module;
 
-	module.xhrReq = function(url) {
+	/**
+	 * XHR wrapper
+	 * @param  {string} url - URL of request
+	 * @return {Promise} Promise object resolving with response
+	 */
+	module.xhrReq = function xhrReq(url) {
 		return new Promise(function(resolve, reject) {
 			var xhr = new XMLHttpRequest();
 			xhr.addEventListener('load', function(evt) {
@@ -25,7 +30,11 @@
 		});
 	};
 
-	module.onDomReady = function() {
+	/**
+	 * DOM ready listener
+	 * @return {Promise} Promise object resolving on DOMContentLoaded
+	 */
+	module.onDomReady = function onDomReady() {
 		return new Promise(function(resolve, reject) {
 			if (document.readyState !== 'loading') {
 				resolve();
@@ -35,7 +44,12 @@
 		});
 	};
 
-	module.debounce = function(fn, delay) {
+	/**
+	 * Debouncing function wrapper
+	 * @param  {Function} fn - Function to debounce
+	 * @param  {number} delay - Minimum time since last invocations to invoke fn
+	 */
+	module.debounce = function debounce(fn, delay) {
 		var self, args, ts, timeout;
 
 		var delayed = function() {

@@ -2,6 +2,7 @@
 
 	var SEARCH_DELAY = 300;
 
+	// Index of characters
 	global.Index = React.createClass({
 		getInitialState: function() {
 			return {
@@ -11,6 +12,7 @@
 			};
 		},
 
+		// Request initial data
 		componentWillMount: function() {
 			var self = this;
 			API.get('characters').then(function(characters) {
@@ -21,6 +23,7 @@
 			}).catch(self.handleAPIFailure);
 		},
 
+		// Refresh data with search results
 		handleSearch: function(term) {
 			var self = this;
 			var query = (term !== '' ? {nameStartsWith: term} : null);
@@ -76,6 +79,7 @@
 			};
 		},
 
+		// Replace the notifyTermChange function with a debounced wrapper to prevent overloading the API with every keystroke
 		componentWillMount: function() {
 			this.notifyTermChange = util.debounce(this.notifyTermChange, SEARCH_DELAY);
 		},
@@ -95,6 +99,7 @@
 		}
 	});
 
+	// Character portrait/link
 	global.IndexCharacter = React.createClass({
 		render: function() {
 			var self = this;

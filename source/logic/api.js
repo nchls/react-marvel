@@ -8,6 +8,8 @@
 
 	var publicKey = '332efd74a79221e47472ac441ba5f181';
 	var apiBase = 'http://gateway.marvel.com/v1/public/';
+
+	// A map of API endpoints and configurations for communicating with them
 	var resources = {
 		characters: {
 			endpoint: 'characters',
@@ -36,6 +38,13 @@
 		}
 	};
 
+	/**
+	 * Requests data from the Marvel API using GET
+	 * @param  {string} resource - Which API endpoint to request from
+	 * @param  {object} params - Key-value pairs to replace in the URL path
+	 * @param  {object} query - Key-value pairs of query string parameters
+	 * @return {Promise} Promise object resolving with transformed data
+	 */
 	module.get = function(resource, params, query) {
 		return new Promise(function(resolve, reject) {
 			var resourceConfig = resources[resource];
@@ -58,7 +67,7 @@
 				// Use cached data from previous call
 				resolve(memCache[url]);
 			} else {
-				// Request data from Marvel API
+				// Request data from API
 				var dataPromise = util.xhrReq(url + '&apikey=' + publicKey);
 				dataPromise.then(function(response) {
 					response = JSON.parse(response);

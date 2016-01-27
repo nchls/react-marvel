@@ -7,6 +7,8 @@
 		var Route = global.ReactRouter.Route;
 		var IndexRoute = global.ReactRouter.IndexRoute;
 		var browserHistory = global.History.createHistory();
+
+		// Define application routes
 		global.ReactDOM.render((
 			<Router history={browserHistory}>
 				<Route path="/" component={App}>
@@ -17,6 +19,7 @@
 		), document.getElementById('app'));
 	});
 
+	// Application wrapper component
 	global.App = React.createClass({
 		render: function() {
 			return <div className="wrap">

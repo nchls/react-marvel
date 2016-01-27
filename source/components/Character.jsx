@@ -1,5 +1,6 @@
 (function(global, API) {
 
+	// Character detail view
 	global.Character = React.createClass({
 		getInitialState: function() {
 			return {
@@ -7,6 +8,7 @@
 			};
 		},
 
+		// Get this character's data from the API
 		componentWillMount: function() {
 			var self = this;
 			API.get('character', {id: self.props.params.id}).then(function(charData) {
@@ -37,6 +39,7 @@
 		}
 	});
 
+	// A generic list of items pertaining to this character
 	global.CharList = React.createClass({
 		getInitialState: function() {
 			return {
